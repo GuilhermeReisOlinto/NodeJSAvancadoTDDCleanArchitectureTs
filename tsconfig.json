@@ -1,0 +1,83 @@
+{
+  "compilerOptions": {   
+    "target": "es2021",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    
+    "module": "commonjs",                                /* Specify what module code is generated. */
+    "rootDir": "src",  
+    //importa todos os arquivos do modulo                                /* Specify the root folder within your source files. */
+    "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
+    "baseUrl": "src",                                  /* Specify the base directory to resolve non-relative module names. */
+    "paths": {
+      "@/*": ["*"],
+      "@/tests/*": ["../tests/*"]
+
+    },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
+    "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
+    // "outFile": "./",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
+    "outDir": "dist",                                   /* Specify an output folder for all emitted files. */
+    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+    // "preserveSymlinks": true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
+    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+
+    /* Type Checking */
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+  },
+  "include": ["src", "tsconfig.json", "person-controller.ts", "tests", "tests"]
+}
+
+/*
+plugins vs
+Bracket Pair Colorizer 2 para colorir as identações {}
+reload
+renderWhitespace: "boundary"
+
+conf projeto
+npm init -y 
+npm i -D typescript
+npx tsc --init ->uso local, npm i tsc uso global
+npx tsc ->executa 
+nvm ls node -> exibe versão do node 
+
+tsconfig{
+"outDir": "dist", -> define onde vai sendo comp js
+"rootDir": "src" -> arquivo padrão 
+"target": "es2021" -> define para qual es vai ser transpilado o ts
+"skipLibCheck": true -> melhora performance no bild, evitando check desnecessário
+"forceConsistentCasingFileNames": true -> evita erros de import case diferentes
+"include":["src"] -> inclui todos os arq dentro de dist  
+"sourceMap": true -> para depuaração de arquivo
+"module":"commonjs" -> tranforma os imports em require 
+"esModuleInterop": true -> Resolve compatibilidade entre imports, require ou imports
+"paths":{
+	"@/*":["*"],
+	"@/tests/*:["../teste/*]
+} -> substitui o caminho do  import ../../aplication por @/aplication. Build conhece, mas start não (npm i modules-alias) (npm i -D @types/modules-alias)
+criar module-alias
+} 
+
+package.json{
+"type": "module" ->para aceitar o import, não precisar do require mas vai ter que fazer referencia ao js no import
+"moduleResolution": "node" -> abilita a pasta diretamente
+"start": "node dist/main/api" ->vai sempre iniciar na dist 
+"build":"rimraf dist && tsc" -> npm i rimraf para apagar a dist 
+}
+
+Para add o husky no prod
+instala a lib que vai fazer a preparação dos arq na staged 
+npm i -D lint-staged
+	
+depois é só criar o arq ".lintstagedrc.json", com o que deve rodar antes do commit 
+
+instalando o husky:
+npm i -D husky
+
+npm pkg set prepare="husky install"
+conferir no pakage.json, se esta dentro do script
+
+add as conf de quando deve ser executado 
+npx husky add .husky/pre-commit "npx lint-staged"
+npx husky add .husky/pre-push "npm run test:coverage
+
+curso: rodrigo manguinho 
+*/
